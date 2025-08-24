@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Financial Statements{% endblock %}
+
+{% block content %}
+<h2>Financial Statements</h2>
+<div class="list-group">
+  <a href="{{ url_for('general_ledger.balance_sheet_report') }}" class="list-group-item list-group-item-action">
+    Balance Sheet
+  </a>
+  <a href="{{ url_for('general_ledger.income_statement_report') }}" class="list-group-item list-group-item-action">
+    Income Statement
+  </a>
+  <!-- More financial statements will go here -->
+</div>
+{% endblock %}

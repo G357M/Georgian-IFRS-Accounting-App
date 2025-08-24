@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h2>Products</h2>
+<a href="{{ url_for('inventory.add_product') }}" class="btn btn-primary mb-3">Add Product</a>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Unit</th>
+            <th>VAT Exempt</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category or 'N/A' }}</td>
+            <td>{{ product.unit_of_measure or 'N/A' }}</td>
+            <td>{{ 'Yes' if product.is_vat_exempt else 'No' }}</td>
+            <td>{{ 'Yes' if product.is_active else 'No' }}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-info">View</a>
+                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">No products found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Payroll Dashboard{% endblock %}
+
+{% block content %}
+<h2>Payroll Dashboard</h2>
+<div class="list-group">
+  <a href="{{ url_for('payroll.list_employees') }}" class="list-group-item list-group-item-action">
+    Manage Employees
+  </a>
+  <a href="{{ url_for('payroll.list_periods') }}" class="list-group-item list-group-item-action">
+    Manage Payroll Periods
+  </a>
+  <a href="{{ url_for('payroll.list_payslips') }}" class="list-group-item list-group-item-action">
+    Manage Payslips
+  </a>
+</div>
+{% endblock %}

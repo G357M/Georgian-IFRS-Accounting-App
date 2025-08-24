@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to GeoAcc!</h1>
+    <p class="lead">Your Georgian IFRS-Compliant Accounting Software.</p>
+    <hr class="my-4">
+    <p>Navigate through the modules using the links above.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">General Ledger</h5>
+                <p class="card-text">Manage your chart of accounts and journal entries.</p>
+                <a href="{{ url_for('general_ledger.chart_of_accounts') }}" class="btn btn-primary">Go to GL</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Accounts</h5>
+                <p class="card-text">Manage customers, vendors, and invoices.</p>
+                <a href="{{ url_for('accounts.index') }}" class="btn btn-primary">Go to Accounts</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Inventory</h5>
+                <p class="card-text">Track products and inventory movements.</p>
+                <a href="{{ url_for('inventory.index') }}" class="btn btn-primary">Go to Inventory</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Payroll</h5>
+                <p class="card-text">Manage employees and payroll processing.</p>
+                <a href="{{ url_for('payroll.index') }}" class="btn btn-primary">Go to Payroll</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Reporting</h5>
+                <p class="card-text">Generate various financial and tax reports.</p>
+                <a href="{{ url_for('reporting.index') }}" class="btn btn-primary">Go to Reports</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

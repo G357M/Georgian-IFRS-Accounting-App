@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<!-- saved from url=(0108)https://page.genspark.site/page/toolu_01X23eNDhNP8tgJAYSuCeYfH/georgian_ifrs_accounting_software_design.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian IFRS-Compliant Accounting Software Design</title>
+    <link href="./Georgian IFRS-Compliant Accounting Software Design_files/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Georgian IFRS-Compliant Accounting Software Design_files/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .code-block {
+            background-color: #f8f8f8;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .section-header {
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .diagram {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre;
+            line-height: 1.2;
+            background-color: #f8fafe;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+        .architecture-box {
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background-color: #f9fafb;
+        }
+    </style>
+<style id="genspark-badge">
+    .genspark-badge-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .genspark-modal {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 10000;
+      justify-content: end;
+    }
+    
+    .genspark-modal-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 450px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      .genspark-modal-content {
+        max-width: 90%;
+      }
+    }
+    
+    .genspark-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    
+    .genspark-title {
+      margin-bottom: 8px;
+      font-weight: normal;
+      display: inline;
+      font-size: 14px;
+    }
+    
+    .genspark-report {
+      color: #909499;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 14px;
+      display: inline;
+    }
+    
+    .genspark-info {
+      margin: 25px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .genspark-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .genspark-remove-btn {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      color: #333;
+      padding: 4px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex: 1;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
+    .genspark-go-btn {
+      background-color: #222;
+      border: none;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex: 1;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+  </style></head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header Section -->
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-blue-700 mb-4">Georgian IFRS-Compliant Accounting Software Design</h1>
+            <p class="text-xl text-gray-600 mb-6">A Comprehensive Python-Based Accounting Solution</p>
+            <div class="flex justify-center">
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-3 py-1 rounded">IFRS Compliant</span>
+                <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-3 py-1 rounded">Georgian Tax Code</span>
+                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-3 py-1 rounded">Modular Design</span>
+                <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded">Python-Based</span>
+            </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">Executive Summary</h2>
+            <p class="mb-4">
+                This document outlines the design of a comprehensive, modular accounting software implemented in Python, specifically 
+                tailored to comply with Georgian legislation and International Financial Reporting Standards (IFRS). The software aims to 
+                provide Georgian businesses with a reliable, compliant, and efficient solution for managing their financial operations.
+            </p>
+            <p class="mb-4">
+                Based on extensive research of Georgian tax regulations, IFRS requirements, and local business practices, this solution 
+                incorporates all necessary components for full legal compliance while maintaining international accounting standards.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg mb-2 text-blue-700">Georgian Legislation Compliance</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>VAT rate of 18% with automatic calculation</li>
+                        <li>Support for 100,000 GEL VAT registration threshold</li>
+                        <li>Pension system with 2+2+2 contribution scheme</li>
+                        <li>Monthly VAT returns due by the 15th</li>
+                        <li>Georgian Lari (GEL) as primary currency</li>
+                        <li>Support for Georgian data privacy laws</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg mb-2 text-blue-700">IFRS Compliance</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Full IFRS Standards implementation (Blue Book 2023)</li>
+                        <li>Support for IFRS for SMEs where applicable</li>
+                        <li>Double-entry bookkeeping system</li>
+                        <li>Multi-currency transaction handling</li>
+                        <li>Comprehensive financial statement generation</li>
+                        <li>Audit trail for all transactions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">System Architecture</h2>
+            <p class="mb-4">
+                The accounting software follows a modular, layered architecture based on the Model-View-Controller (MVC) pattern, 
+                ensuring separation of concerns and facilitating maintainability and extensibility.
+            </p>
+
+            <div class="diagram text-xs mb-6">
++-------------------------------------------------------------------------+
+|                           Presentation Layer                             |
+|  +-------------+  +---------------+  +-------------+  +---------------+  |
+|  | Web Interface|  | Desktop GUI   |  | Reports     |  | Export/Import |  |
+|  | (Django/Flask)|  | (PyQt/Tkinter)|  | Generation  |  | (PDF/Excel)   |  |
+|  +-------------+  +---------------+  +-------------+  +---------------+  |
++-------------------------------------------------------------------------+
+                                 |
++-------------------------------------------------------------------------+
+|                           Application Layer                              |
+|  +--------------+  +------------+  +---------------+  +----------------+ |
+|  | Authentication|  | Business   |  | Validation    |  | Integration    | |
+|  | &amp; Authorization|  | Logic     |  | Rules         |  | Services       | |
+|  +--------------+  +------------+  +---------------+  +----------------+ |
++-------------------------------------------------------------------------+
+                                 |
++-------------------------------------------------------------------------+
+|                             Domain Layer                                 |
+|  +----------------+  +---------------+  +----------------+  +-----------+|
+|  | General Ledger  |  | Accounts      |  | Inventory      |  | Tax       ||
+|  | Module          |  | Payable/      |  | Management     |  | Reporting ||
+|  |                 |  | Receivable    |  | Module         |  | Module    ||
+|  +----------------+  +---------------+  +----------------+  +-----------+|
+|  +----------------+  +---------------+  +----------------+               |
+|  | Multi-Currency  |  | Audit Trail   |  | Payroll        |               |
+|  | Module          |  | Module        |  | Module         |               |
+|  +----------------+  +---------------+  +----------------+               |
++-------------------------------------------------------------------------+
+                                 |
++-------------------------------------------------------------------------+
+|                            Data Access Layer                             |
+|  +---------------+  +-------------+  +----------------+  +--------------+|
+|  | ORM           |  | SQL         |  | Data           |  | Backup &amp;     ||
+|  | (SQLAlchemy)  |  | Queries     |  | Transformations|  | Recovery     ||
+|  +---------------+  +-------------+  +----------------+  +--------------+|
++-------------------------------------------------------------------------+
+                                 |
++-------------------------------------------------------------------------+
+|                           Data Storage Layer                             |
+|  +----------------+  +----------------+  +---------------------+         |
+|  | Database       |  | File Storage   |  | External APIs       |         |
+|  | (PostgreSQL)   |  | (Documents)    |  | (Banking, Tax)      |         |
+|  +----------------+  +----------------+  +---------------------+         |
++-------------------------------------------------------------------------+
+            </div>
+
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Technology Stack</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="architecture-box">
+                    <h4 class="font-bold mb-2">Backend</h4>
+                    <ul class="list-disc pl-5">
+                        <li>Python 3.10+</li>
+                        <li>Django/Flask framework</li>
+                        <li>SQLAlchemy ORM</li>
+                        <li>PostgreSQL database</li>
+                        <li>Redis for caching</li>
+                    </ul>
+                </div>
+                <div class="architecture-box">
+                    <h4 class="font-bold mb-2">Frontend</h4>
+                    <ul class="list-disc pl-5">
+                        <li>Tkinter/PyQt for desktop</li>
+                        <li>React.js for web interface</li>
+                        <li>Bootstrap for responsive design</li>
+                        <li>Chart.js for data visualization</li>
+                    </ul>
+                </div>
+                <div class="architecture-box">
+                    <h4 class="font-bold mb-2">Libraries &amp; Tools</h4>
+                    <ul class="list-disc pl-5">
+                        <li>Pandas for data processing</li>
+                        <li>NumPy for calculations</li>
+                        <li>ReportLab/openpyxl for exports</li>
+                        <li>PyTest for testing</li>
+                        <li>Docker for deployment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Key Design Principles</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <ul class="list-disc pl-5">
+                        <li><strong>Modularity:</strong> Independent modules with well-defined interfaces</li>
+                        <li><strong>Extensibility:</strong> Plugin architecture for custom extensions</li>
+                        <li><strong>Security:</strong> Role-based access control and data encryption</li>
+                        <li><strong>Scalability:</strong> Support for multi-entity organizations</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="list-disc pl-5">
+                        <li><strong>Compliance:</strong> Built-in validation rules for Georgian tax and IFRS</li>
+                        <li><strong>Auditability:</strong> Comprehensive logging and change tracking</li>
+                        <li><strong>Localization:</strong> Multi-language support (Georgian and English)</li>
+                        <li><strong>Integration:</strong> API-first approach for third-party connections</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Modules -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 section-header">Core Modules</h2>
+
+            <!-- General Ledger Module -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">
+                    <i class="fas fa-book-open mr-2"></i>General Ledger Module
+                </h3>
+                <p class="mb-4">
+                    The General Ledger module serves as the central financial record-keeping system, implementing double-entry 
+                    accounting principles in accordance with IFRS and Georgian accounting standards.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Key Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Chart of accounts customizable for Georgian businesses</li>
+                            <li>Double-entry transaction processing</li>
+                            <li>Journal entries with multi-currency support</li>
+                            <li>Period closing and opening procedures</li>
+                            <li>Financial statement generation (Balance Sheet, Income Statement, Cash Flow)</li>
+                            <li>Trial balance and account reconciliation</li>
+                            <li>IFRS-specific adjustments (revaluation, depreciation)</li>
+                            <li>Budget tracking and variance analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Implementation Details</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Account class hierarchy based on Georgian chart of accounts</li>
+                            <li>Transaction validation rules for maintaining balanced entries</li>
+                            <li>Support for different fiscal periods</li>
+                            <li>Historical data retention for audit purposes</li>
+                            <li>IFRS adjustment workflow integration</li>
+                            <li>Exchange rate management for multi-currency operations</li>
+                            <li>Financial report templates compliant with Georgian requirements</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">Core Classes</h4>
+                <div class="code-block text-xs">
+class Account:
+    """Base class for all accounting accounts"""
+    def __init__(self, code, name, account_type, currency="GEL", is_active=True):
+        self.code = code              # Account code per Georgian chart of accounts
+        self.name = name              # Account name
+        self.account_type = account_type  # Asset, Liability, Equity, Revenue, Expense
+        self.currency = currency      # Default is GEL
+        self.is_active = is_active    # Active status
+        self.balance = Decimal('0.00')
+        self.transactions = []        # History of transactions
+        
+    def get_balance(self, as_of_date=None):
+        """Get account balance as of a specific date"""
+        pass
+        
+class Transaction:
+    """Represents a financial transaction with double entries"""
+    def __init__(self, date, description, reference=None):
+        self.transaction_id = str(uuid.uuid4())
+        self.date = date
+        self.description = description
+        self.reference = reference
+        self.entries = []             # List of journal entries
+        self.created_by = None        # User who created the transaction
+        self.created_at = datetime.now()
+        self.status = "draft"         # draft, posted, voided
+        
+    def add_entry(self, account, debit=Decimal('0.00'), credit=Decimal('0.00'), 
+                 currency="GEL", exchange_rate=Decimal('1.00')):
+        """Add a journal entry to the transaction"""
+        pass
+        
+    def validate(self):
+        """Ensure transaction follows double-entry principles"""
+        total_debits = sum(entry.debit for entry in self.entries)
+        total_credits = sum(entry.credit for entry in self.entries)
+        return total_debits == total_credits
+        
+    def post(self):
+        """Post the transaction to the general ledger"""
+        if self.validate():
+            for entry in self.entries:
+                if entry.debit &gt; 0:
+                    entry.account.debit(entry.debit)
+                if entry.credit &gt; 0:
+                    entry.account.credit(entry.credit)
+            self.status = "posted"
+            return True
+        return False
+
+class FinancialStatement:
+    """Base class for generating financial statements"""
+    def __init__(self, company, period_start, period_end):
+        self.company = company
+        self.period_start = period_start
+        self.period_end = period_end
+        
+    def generate(self):
+        """Generate the statement"""
+        pass
+        
+class BalanceSheet(FinancialStatement):
+    """IFRS-compliant balance sheet generator"""
+    def generate(self):
+        # Implementation for Georgian and IFRS-compliant balance sheet
+        pass
+        
+class IncomeStatement(FinancialStatement):
+    """IFRS-compliant income statement generator"""
+    def generate(self):
+        # Implementation for Georgian and IFRS-compliant income statement
+        pass</div>
+            </div>
+            
+            <!-- Accounts Payable/Receivable Module -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">
+                    <i class="fas fa-file-invoice-dollar mr-2"></i>Accounts Payable/Receivable Module
+                </h3>
+                <p class="mb-4">
+                    The Accounts Payable/Receivable module manages all vendor and customer financial interactions, 
+                    including invoicing, payment processing, and aging analysis in accordance with Georgian business practices.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Accounts Payable Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Vendor management with Georgian tax information</li>
+                            <li>Invoice registration and validation</li>
+                            <li>Payment scheduling and automation</li>
+                            <li>Georgian VAT handling (18%)</li>
+                            <li>Expense categorization</li>
+                            <li>Multi-currency vendor payments</li>
+                            <li>Recurring payment setup</li>
+                            <li>Vendor statement reconciliation</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Accounts Receivable Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Customer management with Georgian tax details</li>
+                            <li>Invoice generation compliant with Georgian requirements</li>
+                            <li>Payment tracking and reconciliation</li>
+                            <li>Automated VAT calculation (18%)</li>
+                            <li>Aging reports and collections management</li>
+                            <li>Credit limit monitoring</li>
+                            <li>Customer statement generation</li>
+                            <li>Integration with Georgian e-invoicing system</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">Georgian VAT Processing</h4>
+                <p class="mb-2">
+                    The module incorporates special handling for Georgian VAT rules, including:
+                </p>
+                <ul class="list-disc pl-5 space-y-1 mb-4">
+                    <li>Automatic detection of 100,000 GEL threshold for VAT registration</li>
+                    <li>Support for VAT-exempt transactions with or without right of deduction</li>
+                    <li>Reverse-charge VAT for foreign service providers</li>
+                    <li>Monthly VAT reporting automation (due by 15th of each month)</li>
+                    <li>VAT invoice generation compliant with Revenue Service requirements</li>
+                </ul>
+                
+                <h4 class="font-bold text-lg mb-2">Core Classes</h4>
+                <div class="code-block text-xs">
+class Invoice:
+    """Base class for both sales and purchase invoices"""
+    def __init__(self, invoice_number, date, party, due_date, currency="GEL"):
+        self.invoice_number = invoice_number
+        self.date = date
+        self.party = party  # Customer or Vendor
+        self.due_date = due_date
+        self.currency = currency
+        self.exchange_rate = Decimal('1.00')  # If not GEL
+        self.items = []
+        self.status = "draft"  # draft, issued, paid, cancelled
+        self.total_net = Decimal('0.00')
+        self.total_vat = Decimal('0.00')
+        self.total_gross = Decimal('0.00')
+        
+    def add_item(self, description, quantity, unit_price, vat_rate=Decimal('0.18'), 
+                vat_exempt=False, vat_deductible=True):
+        """Add line item to invoice with Georgian VAT rules"""
+        item = InvoiceItem(description, quantity, unit_price, vat_rate, 
+                          vat_exempt, vat_deductible)
+        self.items.append(item)
+        self._recalculate_totals()
+        
+    def _recalculate_totals(self):
+        """Calculate invoice totals with Georgian VAT rules"""
+        self.total_net = sum(item.net_amount for item in self.items)
+        self.total_vat = sum(item.vat_amount for item in self.items)
+        self.total_gross = self.total_net + self.total_vat
+        
+    def finalize(self):
+        """Finalize the invoice and create accounting entries"""
+        pass
+
+class SalesInvoice(Invoice):
+    """Invoice for sales transactions"""
+    def __init__(self, invoice_number, date, customer, due_date, currency="GEL"):
+        super().__init__(invoice_number, date, customer, due_date, currency)
+        self.rs_upload_status = "pending"  # For Georgian Revenue Service
+        
+    def generate_vat_invoice(self):
+        """Generate Georgian VAT invoice for Revenue Service"""
+        # Implementation for RS.ge compatible VAT invoice
+        pass
+        
+    def upload_to_revenue_service(self):
+        """Upload invoice to Georgian Revenue Service"""
+        # Implementation for API integration with RS.ge
+        pass
+
+class PurchaseInvoice(Invoice):
+    """Invoice for purchase transactions"""
+    def __init__(self, invoice_number, date, vendor, due_date, currency="GEL"):
+        super().__init__(invoice_number, date, vendor, due_date, currency)
+        self.reverse_charge_vat = False
+        
+    def apply_reverse_charge_vat(self):
+        """Apply Georgian reverse charge VAT rules for foreign vendors"""
+        if self.party.is_foreign:
+            self.reverse_charge_vat = True
+            self._calculate_reverse_charge_vat()
+        
+    def _calculate_reverse_charge_vat(self):
+        """Calculate reverse charge VAT according to Georgian rules"""
+        # Implementation of Georgian reverse charge VAT calculation
+        pass
+
+class AgingReport:
+    """Generate aging analysis for receivables or payables"""
+    def __init__(self, as_of_date, type="receivables"):
+        self.as_of_date = as_of_date
+        self.type = type  # receivables or payables
+        
+    def generate(self):
+        """Generate aging buckets according to Georgian standards"""
+        # Implementation with 0-30, 31-60, 61-90, &gt;90 day buckets
+        pass</div>
+            </div>
+            
+            <!-- Inventory Management Module -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">
+                    <i class="fas fa-boxes mr-2"></i>Inventory Management Module
+                </h3>
+                <p class="mb-4">
+                    The Inventory Management module tracks stock levels, costs, and movements in accordance with 
+                    both Georgian requirements and IFRS inventory valuation standards.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Key Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Multiple inventory valuation methods (FIFO, LIFO, weighted average)</li>
+                            <li>Stock tracking and movement history</li>
+                            <li>Inventory adjustments with audit trail</li>
+                            <li>Barcode and serial number tracking</li>
+                            <li>Multi-warehouse and location support</li>
+                            <li>Minimum stock level alerts</li>
+                            <li>Inventory reports and analysis</li>
+                            <li>Integration with purchase and sales modules</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">IFRS Compliance Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Cost accounting aligned with IAS 2 Inventories</li>
+                            <li>Net realizable value assessment</li>
+                            <li>Write-down and obsolescence handling</li>
+                            <li>Capitalization of eligible costs</li>
+                            <li>Inventory valuation reporting</li>
+                            <li>Cost of goods sold calculation</li>
+                            <li>Consignment inventory handling</li>
+                            <li>Periodic and perpetual inventory methods</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">Georgian-Specific Implementation</h4>
+                <ul class="list-disc pl-5 space-y-1 mb-4">
+                    <li>Support for Georgian units of measurement</li>
+                    <li>Import documentation with customs value tracking</li>
+                    <li>Inventory reporting for Georgian tax authorities</li>
+                    <li>VAT handling for inventory transactions</li>
+                    <li>Supporting documents in Georgian language</li>
+                </ul>
+                
+                <h4 class="font-bold text-lg mb-2">Core Classes</h4>
+                <div class="code-block text-xs">
+class Product:
+    """Product master data"""
+    def __init__(self, code, name, category, unit_of_measure, is_vat_exempt=False):
+        self.code = code
+        self.name = name
+        self.category = category
+        self.unit_of_measure = unit_of_measure
+        self.is_vat_exempt = is_vat_exempt
+        self.is_active = True
+        self.created_at = datetime.now()
+        self.inventory_accounts = {
+            'stock': None,  # GL account for inventory
+            'cost_of_sales': None,  # GL account for cost of goods sold
+            'sales': None,  # GL account for sales revenue
+            'purchase': None  # GL account for purchases
+        }
+
+class InventoryValuationMethod:
+    """Abstract base class for inventory valuation methods"""
+    def calculate_cost(self, product, quantity, inventory_movements):
+        """Calculate cost based on valuation method"""
+        raise NotImplementedError
+
+class FIFOValuation(InventoryValuationMethod):
+    """First-In-First-Out valuation compliant with IFRS"""
+    def calculate_cost(self, product, quantity, inventory_movements):
+        # Implementation of FIFO algorithm
+        pass
+
+class WeightedAverageValuation(InventoryValuationMethod):
+    """Weighted average cost valuation compliant with IFRS"""
+    def calculate_cost(self, product, quantity, inventory_movements):
+        # Implementation of weighted average algorithm
+        pass
+
+class InventoryTransaction:
+    """Base class for inventory movements"""
+    def __init__(self, date, product, quantity, reference_document=None):
+        self.transaction_id = str(uuid.uuid4())
+        self.date = date
+        self.product = product
+        self.quantity = quantity
+        self.reference_document = reference_document
+        self.status = "draft"  # draft, posted, voided
+        
+    def post(self):
+        """Post the inventory transaction and update stock levels"""
+        pass
+
+class StockReceipt(InventoryTransaction):
+    """Receipt of goods into inventory"""
+    def __init__(self, date, product, quantity, unit_cost, supplier=None, 
+                purchase_invoice=None):
+        super().__init__(date, product, quantity, purchase_invoice)
+        self.unit_cost = unit_cost
+        self.supplier = supplier
+        self.total_cost = quantity * unit_cost
+        
+class StockIssue(InventoryTransaction):
+    """Issue of goods from inventory"""
+    def __init__(self, date, product, quantity, valuation_method, customer=None, 
+                sales_invoice=None):
+        super().__init__(date, product, quantity, sales_invoice)
+        self.customer = customer
+        self.valuation_method = valuation_method
+        self.unit_cost = None  # To be calculated based on valuation method
+        self.total_cost = None  # To be calculated based on valuation method
+        
+    def calculate_cost(self, inventory_movements):
+        """Calculate cost using the specified valuation method"""
+        self.unit_cost, self.total_cost = self.valuation_method.calculate_cost(
+            self.product, self.quantity, inventory_movements)
+
+class InventoryAdjustment(InventoryTransaction):
+    """Adjustment to inventory quantities or values"""
+    def __init__(self, date, product, quantity, reason, approved_by=None):
+        super().__init__(date, product, quantity)
+        self.reason = reason
+        self.approved_by = approved_by
+        
+class InventoryReport:
+    """Inventory reporting functionality"""
+    def __init__(self, as_of_date):
+        self.as_of_date = as_of_date
+        
+    def stock_valuation_report(self):
+        """Generate inventory valuation report for IFRS compliance"""
+        pass
+        
+    def slow_moving_inventory_report(self):
+        """Identify slow-moving or obsolete inventory"""
+        pass</div>
+            </div>
+            
+            <!-- Tax Reporting Module -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">
+                    <i class="fas fa-file-invoice mr-2"></i>Tax Reporting Module
+                </h3>
+                <p class="mb-4">
+                    The Tax Reporting module automates the preparation and submission of tax reports and declarations
+                    required by Georgian tax authorities, ensuring full compliance with the Georgian Tax Code.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Key Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>VAT returns (monthly, by the 15th)</li>
+                            <li>Income tax declarations</li>
+                            <li>Corporate profit tax reporting</li>
+                            <li>Withholding tax calculations</li>
+                            <li>Payroll tax reporting (including pension contributions)</li>
+                            <li>Tax payment scheduling</li>
+                            <li>Tax audit support documentation</li>
+                            <li>Historic tax reporting archive</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Georgian Tax Compliance Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Integration with Georgian Revenue Service (RS.ge)</li>
+                            <li>Support for electronic submission of declarations</li>
+                            <li>VAT registration threshold monitoring (100,000 GEL)</li>
+                            <li>Export of data in Georgian tax authority format</li>
+                            <li>Automatic updates for tax rate changes</li>
+                            <li>Support for tax calendar and notifications</li>
+                            <li>Generation of Georgian statutory tax forms</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">VAT Processing Details</h4>
+                <div class="table-container mb-4">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    VAT Type
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Rate
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Calculation Method
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Reporting Requirements
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Standard VAT
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    18%
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Applied to sales of goods and services in Georgia
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Monthly declaration by the 15th
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Exempt with right of deduction
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    0%
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    No VAT charged, but input VAT can be reclaimed
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Must be reported in monthly declaration
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Exempt without right of deduction
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    0%
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    No VAT charged, input VAT cannot be reclaimed
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Must be reported in monthly declaration
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Reverse-charge VAT
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    18%
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Applied to services from non-resident providers
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    Special section in monthly declaration
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">Core Classes</h4>
+                <div class="code-block text-xs">
+class TaxRate:
+    """Tax rate definitions and historical tracking"""
+    def __init__(self, tax_type, rate, effective_date, end_date=None):
+        self.tax_type = tax_type  # VAT, income tax, etc.
+        self.rate = rate  # Decimal value
+        self.effective_date = effective_date
+        self.end_date = end_date
+        
+    @classmethod
+    def get_current_rate(cls, tax_type, date=None):
+        """Get tax rate applicable on a specific date"""
+        if date is None:
+            date = datetime.now().date()
+        # Query for appropriate rate based on date and tax type
+        pass
+
+class VATDeclaration:
+    """Georgian VAT declaration generator"""
+    def __init__(self, company, period_start, period_end):
+        self.company = company
+        self.period_start = period_start
+        self.period_end = period_end
+        self.vat_payable = Decimal('0.00')
+        self.vat_receivable = Decimal('0.00')
+        self.net_vat = Decimal('0.00')
+        
+    def calculate(self):
+        """Calculate VAT based on transactions in the period"""
+        # Implementation according to Georgian Tax Code
+        pass
+        
+    def generate_form(self):
+        """Generate Georgian VAT declaration form"""
+        # Implementation to create RS.ge compatible form
+        pass
+        
+    def submit_to_rs(self, authorized_user, password):
+        """Submit declaration to Georgian Revenue Service"""
+        # Implementation to interface with RS.ge API
+        pass
+
+class IncomeTaxDeclaration:
+    """Georgian income tax declaration generator"""
+    def __init__(self, company, year):
+        self.company = company
+        self.year = year
+        
+    def calculate(self):
+        """Calculate income tax based on annual transactions"""
+        # Implementation according to Georgian Tax Code
+        pass
+        
+    def generate_form(self):
+        """Generate Georgian income tax declaration form"""
+        # Implementation to create RS.ge compatible form
+        pass
+
+class PensionContribution:
+    """Georgian pension system contribution calculator"""
+    def __init__(self, employee, salary_period):
+        self.employee = employee
+        self.salary_period = salary_period
+        self.gross_salary = Decimal('0.00')
+        
+    def calculate_contributions(self):
+        """Calculate 2+2+2 pension contributions"""
+        employee_contribution = self.gross_salary * Decimal('0.02')
+        employer_contribution = self.gross_salary * Decimal('0.02')
+        government_contribution = self.gross_salary * Decimal('0.02')
+        
+        # Cap government contribution if salary exceeds 24,000 GEL annually
+        # Implementation of Georgian pension rules
+        
+        return {
+            'employee': employee_contribution,
+            'employer': employer_contribution,
+            'government': government_contribution,
+            'total': employee_contribution + employer_contribution + government_contribution
+        }
+
+class TaxCalendar:
+    """Tax calendar for Georgian tax deadlines"""
+    def __init__(self, year):
+        self.year = year
+        self.deadlines = self._generate_deadlines()
+        
+    def _generate_deadlines(self):
+        """Generate tax deadlines according to Georgian tax calendar"""
+        deadlines = []
+        
+        # VAT deadlines (15th of each month)
+        for month in range(1, 13):
+            deadline_date = datetime(self.year, month, 15).date()
+            deadlines.append({
+                'tax_type': 'VAT',
+                'deadline': deadline_date,
+                'description': f'VAT Declaration for {calendar.month_name[month-1]}'
+            })
+        
+        # Add other Georgian tax deadlines (annual declarations, etc.)
+        
+        return deadlines
+        
+    def get_upcoming_deadlines(self, days_ahead=30):
+        """Get upcoming tax deadlines within specified days"""
+        today = datetime.now().date()
+        future = today + timedelta(days=days_ahead)
+        
+        return [d for d in self.deadlines if today &lt;= d['deadline'] &lt;= future]</div>
+            </div>
+            
+            <!-- Audit Trail Module -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">
+                    <i class="fas fa-search-dollar mr-2"></i>Audit Trail Module
+                </h3>
+                <p class="mb-4">
+                    The Audit Trail module implements comprehensive logging and tracking of all system activities,
+                    ensuring data integrity, accountability, and compliance with both Georgian regulations and 
+                    international auditing standards.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Key Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Transaction logging with full change history</li>
+                            <li>User activity tracking</li>
+                            <li>Document version control</li>
+                            <li>Data modification history</li>
+                            <li>Login and security event logging</li>
+                            <li>System configuration change tracking</li>
+                            <li>Audit report generation</li>
+                            <li>Data for internal and external auditors</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Compliance Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Immutable audit records</li>
+                            <li>Digital signatures for critical transactions</li>
+                            <li>Timestamp validation</li>
+                            <li>Data integrity verification</li>
+                            <li>Role-based audit trail access</li>
+                            <li>Long-term audit data archiving</li>
+                            <li>Audit trail protection against tampering</li>
+                            <li>Customizable retention periods</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">Auditing Implementation</h4>
+                <ul class="list-disc pl-5 space-y-1 mb-4">
+                    <li>Database-level auditing via triggers and shadow tables</li>
+                    <li>Application-level auditing integrated across all modules</li>
+                    <li>Security-level auditing for authentication and authorization events</li>
+                    <li>Encrypted audit logs with secure storage</li>
+                    <li>Real-time monitoring with alert capabilities for suspicious activities</li>
+                </ul>
+                
+                <h4 class="font-bold text-lg mb-2">Core Classes</h4>
+                <div class="code-block text-xs">
+class AuditTrail:
+    """Base class for audit trail functionality"""
+    def __init__(self, entity_type, entity_id, action, user, timestamp=None):
+        self.audit_id = str(uuid.uuid4())
+        self.entity_type = entity_type  # Table or object being audited
+        self.entity_id = entity_id  # Primary key of audited record
+        self.action = action  # create, update, delete, view
+        self.user = user  # User who performed the action
+        self.timestamp = timestamp or datetime.now()
+        self.ip_address = None  # Client IP address
+        self.changes = {}  # Dictionary of changed fields
+
+class DataChangeAudit(AuditTrail):
+    """Audit trail for data modifications"""
+    def __init__(self, entity_type, entity_id, action, user, 
+                old_values=None, new_values=None):
+        super().__init__(entity_type, entity_id, action, user)
+        self.old_values = old_values or {}
+        self.new_values = new_values or {}
+        self._calculate_changes()
+        
+    def _calculate_changes(self):
+        """Calculate and store the specific changes made"""
+        for key in self.new_values:
+            if key in self.old_values:
+                if self.new_values[key] != self.old_values[key]:
+                    self.changes[key] = {
+                        'old': self.old_values[key],
+                        'new': self.new_values[key]
+                    }
+            else:
+                self.changes[key] = {
+                    'old': None,
+                    'new': self.new_values[key]
+                }
+
+class SecurityAudit(AuditTrail):
+    """Audit trail for security events"""
+    def __init__(self, event_type, user, status, details=None):
+        super().__init__("SecurityEvent", None, event_type, user)
+        self.status = status  # success, failure
+        self.details = details or {}
+
+class SystemAudit(AuditTrail):
+    """Audit trail for system configuration changes"""
+    def __init__(self, component, action, user, old_config=None, new_config=None):
+        super().__init__("SystemConfig", component, action, user)
+        self.old_config = old_config
+        self.new_config = new_config
+
+class AuditReport:
+    """Generate audit trail reports"""
+    def __init__(self, start_date, end_date, entity_type=None, user=None, action=None):
+        self.start_date = start_date
+        self.end_date = end_date
+        self.entity_type = entity_type
+        self.user = user
+        self.action = action
+        
+    def generate(self):
+        """Generate audit report based on criteria"""
+        # Implementation to query and format audit trail data
+        pass
+        
+class AuditExporter:
+    """Export audit trail data for external review"""
+    def __init__(self, audit_data):
+        self.audit_data = audit_data
+        
+    def to_excel(self, filename):
+        """Export audit data to Excel format"""
+        # Implementation using openpyxl
+        pass
+        
+    def to_pdf(self, filename):
+        """Export audit data to PDF format"""
+        # Implementation using reportlab
+        pass
+
+# Database-level auditing using SQLAlchemy event listeners
+@event.listens_for(Session, 'before_flush')
+def before_flush(session, flush_context, instances):
+    """Capture changes before they are committed to the database"""
+    for obj in session.new:
+        if hasattr(obj, '__tablename__'):
+            # Record creation audit
+            audit = DataChangeAudit(
+                obj.__tablename__, 
+                getattr(obj, 'id', None), 
+                'create', 
+                current_user.id,
+                None,
+                obj.to_dict()
+            )
+            session.add(audit)
+            
+    for obj in session.dirty:
+        if hasattr(obj, '__tablename__'):
+            # Record update audit
+            old_state = session.get_original_state(obj)
+            audit = DataChangeAudit(
+                obj.__tablename__, 
+                getattr(obj, 'id', None), 
+                'update', 
+                current_user.id,
+                old_state,
+                obj.to_dict()
+            )
+            session.add(audit)
+            
+    for obj in session.deleted:
+        if hasattr(obj, '__tablename__'):
+            # Record deletion audit
+            audit = DataChangeAudit(
+                obj.__tablename__, 
+                getattr(obj, 'id', None), 
+                'delete', 
+                current_user.id,
+                obj.to_dict(),
+                None
+            )
+            session.add(audit)</div>
+            </div>
+            
+            <!-- Payroll Module -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold mb-4 text-blue-700">
+                    <i class="fas fa-users mr-2"></i>Payroll Module
+                </h3>
+                <p class="mb-4">
+                    The Payroll module handles employee compensation in compliance with Georgian labor laws,
+                    tax regulations, and the Georgian pension system.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Key Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Employee data management</li>
+                            <li>Salary and wage processing</li>
+                            <li>Tax calculation and withholding</li>
+                            <li>Georgian pension system integration (2+2+2 scheme)</li>
+                            <li>Benefits administration</li>
+                            <li>Leave and absence tracking</li>
+                            <li>Payslip generation</li>
+                            <li>Payroll reporting</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Georgian-Specific Features</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Income tax withholding (20% flat rate)</li>
+                            <li>Pension contribution calculation</li>
+                            <li>Statutory reporting for Georgian authorities</li>
+                            <li>Support for Georgian labor contracts</li>
+                            <li>Multi-language payslips (Georgian/English)</li>
+                            <li>Banking integration for salary transfers</li>
+                            <li>Year-end tax reconciliation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4 class="font-bold text-lg mb-2">Georgian Pension System Implementation</h4>
+                <p class="mb-2">
+                    The module implements the Georgian 2+2+2 pension scheme:
+                </p>
+                <ul class="list-disc pl-5 space-y-1 mb-4">
+                    <li>2% contributed by employee (deducted from gross salary)</li>
+                    <li>2% contributed by employer</li>
+                    <li>2% contributed by government (for salaries up to 24,000 GEL annually)</li>
+                    <li>Automatic calculation and reporting of contributions</li>
+                    <li>Integration with Georgian Pension Agency</li>
+                </ul>
+                
+                <h4 class="font-bold text-lg mb-2">Core Classes</h4>
+                <div class="code-block text-xs">
+class Employee:
+    """Employee data for payroll processing"""
+    def __init__(self, first_name, last_name, personal_id, hire_date, 
+                termination_date=None):
+        self.employee_id = str(uuid.uuid4())
+        self.first_name = first_name
+        self.last_name = last_name
+        self.personal_id = personal_id  # Georgian ID number
+        self.hire_date = hire_date
+        self.termination_date = termination_date
+        self.is_active = True
+        self.salary = Decimal('0.00')
+        self.in_pension_scheme = True  # Georgian pension participation
+        
+class PayrollPeriod:
+    """Represents a payroll processing period"""
+    def __init__(self, start_date, end_date, payment_date):
+        self.period_id = str(uuid.uuid4())
+        self.start_date = start_date
+        self.end_date = end_date
+        self.payment_date = payment_date
+        self.status = "open"  # open, calculated, approved, paid
+        self.payslips = []
+        
+    def calculate(self):
+        """Calculate payroll for all active employees"""
+        # Implementation of Georgian payroll rules
+        pass
+        
+    def approve(self, approver):
+        """Approve the payroll for payment"""
+        if self.status == "calculated":
+            self.status = "approved"
+            self.approved_by = approver
+            self.approved_at = datetime.now()
+            return True
+        return False
+        
+    def pay(self):
+        """Mark payroll as paid and generate payment records"""
+        if self.status == "approved":
+            self.status = "paid"
+            self.paid_at = datetime.now()
+            return True
+        return False
+
+class Payslip:
+    """Individual employee payslip for a period"""
+    def __init__(self, employee, period):
+        self.payslip_id = str(uuid.uuid4())
+        self.employee = employee
+        self.period = period
+        self.gross_salary = Decimal('0.00')
+        self.income_tax = Decimal('0.00')  # 20% in Georgia
+        self.pension_contribution_employee = Decimal('0.00')  # 2%
+        self.pension_contribution_employer = Decimal('0.00')  # 2%
+        self.pension_contribution_government = Decimal('0.00')  # 2%
+        self.net_salary = Decimal('0.00')
+        self.items = []  # Additional earnings or deductions
+        
+    def calculate(self):
+        """Calculate taxes and net pay according to Georgian rules"""
+        # Base gross salary
+        self.gross_salary = self.employee.salary
+        
+        # Add additional earnings
+        for item in self.items:
+            if item.type == "earning":
+                self.gross_salary += item.amount
+        
+        # Calculate pension contributions (2+2+2 system)
+        if self.employee.in_pension_scheme:
+            self.pension_contribution_employee = self.gross_salary * Decimal('0.02')
+            self.pension_contribution_employer = self.gross_salary * Decimal('0.02')
+            
+            # Government contribution cap check (24,000 GEL annually)
+            annual_salary_estimate = self.gross_salary * 12
+            if annual_salary_estimate &lt;= Decimal('24000.00'):
+                self.pension_contribution_government = self.gross_salary * Decimal('0.02')
+            else:
+                # Implement prorated government contribution if needed
+                pass
+        
+        # Calculate income tax (20% flat rate in Georgia)
+        self.income_tax = self.gross_salary * Decimal('0.20')
+        
+        # Calculate deductions
+        total_deductions = self.income_tax + self.pension_contribution_employee
+        for item in self.items:
+            if item.type == "deduction":
+                total_deductions += item.amount
+        
+        # Calculate net salary
+        self.net_salary = self.gross_salary - total_deductions
+        
+        return self.net_salary
+        
+    def generate_pdf(self):
+        """Generate PDF payslip in Georgian and English"""
+        # Implementation using reportlab
+        pass
+
+class PayrollTaxReport:
+    """Generate Georgian tax reports for payroll"""
+    def __init__(self, year, month=None):
+        self.year = year
+        self.month = month
+        
+    def generate_monthly_tax_report(self):
+        """Generate monthly tax report for Georgian tax authorities"""
+        # Implementation according to Georgian requirements
+        pass
+        
+    def generate_annual_tax_report(self):
+        """Generate annual tax report for Georgian tax authorities"""
+        # Implementation according to Georgian requirements
+        pass
+        
+class PensionReport:
+    """Generate Georgian pension reports"""
+    def __init__(self, year, month):
+        self.year = year
+        self.month = month
+        
+    def generate_monthly_report(self):
+        """Generate monthly pension report for Georgian Pension Agency"""
+        # Implementation according to Georgian requirements
+        pass</div>
+            </div>
+        </section>
+        
+        <!-- Database Design -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">Database Design</h2>
+            <p class="mb-4">
+                The database is designed to support all the modules while ensuring data integrity, performance, 
+                and compliance with both Georgian and IFRS requirements.
+            </p>
+            
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Entity-Relationship Overview</h3>
+            <div class="diagram text-xs mb-6">
++------------------+     +------------------+     +------------------+
+| Company          |-----| Fiscal Period    |-----| Chart of Accounts|
++------------------+     +------------------+     +------------------+
+        |                        |                        |
+        |                        |                        |
++------------------+     +------------------+     +------------------+
+| User             |-----| Journal          |-----| Account          |
++------------------+     +------------------+     +------------------+
+        |                        |                        |
+        |                        |                        |
++------------------+     +------------------+     +------------------+
+| Customer/Vendor  |-----| Transaction      |-----| JournalEntry     |
++------------------+     +------------------+     +------------------+
+        |                        |                        |
+        |                        |                        |
++------------------+     +------------------+     +------------------+
+| Invoice          |-----| Payment          |-----| Tax              |
++------------------+     +------------------+     +------------------+
+        |                        |                        |
+        |                        |                        |
++------------------+     +------------------+     +------------------+
+| Product          |-----| Inventory        |-----| FinancialStatement|
++------------------+     +------------------+     +------------------+
+        |                        |                        |
+        |                        |                        |
++------------------+     +------------------+     +------------------+
+| Employee         |-----| Payroll          |-----| AuditTrail       |
++------------------+     +------------------+     +------------------+
+            </div>
+            
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Key Database Tables</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h4 class="font-bold mb-2">Core Tables</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>companies</strong> - Organization data</li>
+                        <li><strong>users</strong> - System users with roles</li>
+                        <li><strong>chart_of_accounts</strong> - Account structure templates</li>
+                        <li><strong>accounts</strong> - Individual GL accounts</li>
+                        <li><strong>fiscal_periods</strong> - Accounting periods</li>
+                        <li><strong>journals</strong> - Journal headers</li>
+                        <li><strong>journal_entries</strong> - Individual journal line items</li>
+                        <li><strong>currencies</strong> - Currency definitions</li>
+                        <li><strong>exchange_rates</strong> - Historical exchange rates</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Operational Tables</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>customers</strong> - Customer master data</li>
+                        <li><strong>vendors</strong> - Vendor master data</li>
+                        <li><strong>invoices</strong> - Invoice header information</li>
+                        <li><strong>invoice_items</strong> - Invoice line items</li>
+                        <li><strong>products</strong> - Product master data</li>
+                        <li><strong>inventory_transactions</strong> - Stock movements</li>
+                        <li><strong>employees</strong> - Employee information</li>
+                        <li><strong>payrolls</strong> - Payroll processing records</li>
+                        <li><strong>payslips</strong> - Individual employee pay records</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h4 class="font-bold mb-2">Compliance Tables</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>tax_rates</strong> - Tax rate definitions with history</li>
+                        <li><strong>tax_declarations</strong> - Tax declaration tracking</li>
+                        <li><strong>tax_transactions</strong> - Taxable transaction details</li>
+                        <li><strong>audit_trails</strong> - System audit records</li>
+                        <li><strong>financial_statements</strong> - Generated statement tracking</li>
+                        <li><strong>document_archives</strong> - Document storage with versioning</li>
+                        <li><strong>compliance_checks</strong> - Validation results</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Configuration Tables</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>settings</strong> - System configuration</li>
+                        <li><strong>roles</strong> - User role definitions</li>
+                        <li><strong>permissions</strong> - Granular access controls</li>
+                        <li><strong>templates</strong> - Report and document templates</li>
+                        <li><strong>integrations</strong> - External system connections</li>
+                        <li><strong>notification_rules</strong> - Alert configurations</li>
+                        <li><strong>scheduled_tasks</strong> - Automated processes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Sample Table Schemas</h3>
+            <div class="code-block text-xs">
+# Example schema for chart_of_accounts table
+CREATE TABLE chart_of_accounts (
+    id SERIAL PRIMARY KEY,
+    company_id INTEGER NOT NULL REFERENCES companies(id),
+    code VARCHAR(20) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    account_type VARCHAR(20) NOT NULL, -- asset, liability, equity, revenue, expense
+    parent_id INTEGER REFERENCES chart_of_accounts(id),
+    is_active BOOLEAN DEFAULT TRUE,
+    description TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    created_by INTEGER REFERENCES users(id),
+    updated_by INTEGER REFERENCES users(id)
+);
+
+# Example schema for journal_entries table
+CREATE TABLE journal_entries (
+    id SERIAL PRIMARY KEY,
+    journal_id INTEGER NOT NULL REFERENCES journals(id),
+    account_id INTEGER NOT NULL REFERENCES chart_of_accounts(id),
+    debit DECIMAL(15,2) DEFAULT 0.00,
+    credit DECIMAL(15,2) DEFAULT 0.00,
+    currency_code CHAR(3) NOT NULL DEFAULT 'GEL',
+    exchange_rate DECIMAL(15,5) DEFAULT 1.00000,
+    debit_gel DECIMAL(15,2) GENERATED ALWAYS AS (debit * exchange_rate) STORED,
+    credit_gel DECIMAL(15,2) GENERATED ALWAYS AS (credit * exchange_rate) STORED,
+    description TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_by INTEGER REFERENCES users(id),
+    CONSTRAINT check_debit_credit CHECK (
+        (debit &gt; 0 AND credit = 0) OR (credit &gt; 0 AND debit = 0)
+    )
+);
+
+# Example schema for tax_transactions table
+CREATE TABLE tax_transactions (
+    id SERIAL PRIMARY KEY,
+    transaction_date DATE NOT NULL,
+    document_type VARCHAR(20) NOT NULL, -- invoice, credit_note, etc.
+    document_id INTEGER NOT NULL,
+    tax_type VARCHAR(20) NOT NULL, -- vat, income_tax, etc.
+    tax_rate DECIMAL(5,2) NOT NULL,
+    taxable_amount DECIMAL(15,2) NOT NULL,
+    tax_amount DECIMAL(15,2) NOT NULL,
+    currency_code CHAR(3) NOT NULL DEFAULT 'GEL',
+    exchange_rate DECIMAL(15,5) DEFAULT 1.00000,
+    tax_amount_gel DECIMAL(15,2) GENERATED ALWAYS AS (tax_amount * exchange_rate) STORED,
+    is_deductible BOOLEAN DEFAULT TRUE,
+    reverse_charge BOOLEAN DEFAULT FALSE,
+    tax_code VARCHAR(20), -- Georgian tax codes
+    declaration_id INTEGER REFERENCES tax_declarations(id),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+# Example schema for employees table (for Georgian payroll)
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    personal_id VARCHAR(20) NOT NULL, -- Georgian ID number
+    birth_date DATE,
+    gender CHAR(1),
+    hire_date DATE NOT NULL,
+    termination_date DATE,
+    is_active BOOLEAN DEFAULT TRUE,
+    department VARCHAR(50),
+    position VARCHAR(50),
+    salary DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    salary_currency CHAR(3) NOT NULL DEFAULT 'GEL',
+    in_pension_scheme BOOLEAN DEFAULT TRUE,
+    bank_account VARCHAR(50),
+    bank_code VARCHAR(20),
+    address TEXT,
+    phone VARCHAR(20),
+    email VARCHAR(100),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    CONSTRAINT unique_personal_id UNIQUE (personal_id)
+);</div>
+        </section>
+        
+        <!-- Security & Compliance -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">Security &amp; Compliance</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Security Features</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Authentication:</strong> Multi-factor authentication (MFA) with strong password policies</li>
+                        <li><strong>Authorization:</strong> Role-based access control (RBAC) with fine-grained permissions</li>
+                        <li><strong>Data Encryption:</strong> At-rest and in-transit encryption of sensitive data</li>
+                        <li><strong>Audit Logging:</strong> Comprehensive activity tracking for security and compliance</li>
+                        <li><strong>Session Management:</strong> Secure session handling with automatic timeouts</li>
+                        <li><strong>Input Validation:</strong> Protection against common security vulnerabilities</li>
+                        <li><strong>Backup &amp; Recovery:</strong> Automated backup protocols with secured storage</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Georgian Compliance</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Georgian Data Privacy:</strong> Compliance with Georgian personal data protection law of June 14, 2023</li>
+                        <li><strong>Tax Compliance:</strong> Adherence to Georgian Tax Code requirements</li>
+                        <li><strong>Reporting Standards:</strong> Support for Georgian statutory reporting formats</li>
+                        <li><strong>Digital Signatures:</strong> Implementation of Georgian electronic signature standards</li>
+                        <li><strong>Document Retention:</strong> Compliance with Georgian document retention requirements</li>
+                        <li><strong>Language Support:</strong> Full Georgian language localization</li>
+                        <li><strong>Regulatory Updates:</strong> Automatic updates for changes in Georgian legislation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">IFRS Compliance</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Financial Statements:</strong> IFRS-compliant statement generation</li>
+                        <li><strong>Accounting Principles:</strong> Implementation of IFRS accounting rules</li>
+                        <li><strong>Disclosures:</strong> Support for required IFRS disclosures</li>
+                        <li><strong>Fair Value:</strong> Tools for fair value calculations and adjustments</li>
+                        <li><strong>Asset Valuation:</strong> IFRS-compliant asset valuation methods</li>
+                        <li><strong>Revenue Recognition:</strong> Compliance with IFRS 15 revenue standards</li>
+                        <li><strong>Lease Accounting:</strong> Support for IFRS 16 lease requirements</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">User Access Management</h3>
+                    <div class="table-container">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Role
+                                    </th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Access Level
+                                    </th>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Capabilities
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200 text-xs">
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Administrator</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Full System</td>
+                                    <td class="px-4 py-2">System configuration, user management, all operations</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Chief Accountant</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Full Accounting</td>
+                                    <td class="px-4 py-2">All accounting functions, approvals, financial reporting</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Accountant</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Limited</td>
+                                    <td class="px-4 py-2">Transaction entry, basic reports, no approvals</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Auditor</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Read-only</td>
+                                    <td class="px-4 py-2">View all transactions and reports, audit trail access</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Tax Specialist</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Tax Module</td>
+                                    <td class="px-4 py-2">Tax calculations, declarations, reporting</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Inventory Manager</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Inventory Module</td>
+                                    <td class="px-4 py-2">Stock management, inventory valuation</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap">Payroll Officer</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">Payroll Module</td>
+                                    <td class="px-4 py-2">Employee data, salary calculations, payslips</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Integration & External Systems -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">Integration &amp; External Systems</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Georgian Revenue Service Integration</h3>
+                    <p class="mb-4">
+                        Direct integration with the Georgian Revenue Service (RS.ge) for automated tax reporting:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>VAT declaration submission</li>
+                        <li>VAT invoice registration</li>
+                        <li>Income tax reporting</li>
+                        <li>Tax payment status tracking</li>
+                        <li>Electronic document exchange</li>
+                    </ul>
+                    <div class="code-block text-xs mt-2">
+class RSIntegration:
+    """Integration with Georgian Revenue Service"""
+    def __init__(self, company, api_credentials):
+        self.company = company
+        self.credentials = api_credentials
+        self.api_base_url = "https://api.rs.ge/v1/"
+        
+    def upload_vat_declaration(self, declaration):
+        """Upload VAT declaration to RS.ge"""
+        endpoint = "tax/vat/declaration"
+        payload = declaration.to_rs_format()
+        return self._api_request("POST", endpoint, payload)
+        
+    def register_vat_invoice(self, invoice):
+        """Register VAT invoice with RS.ge"""
+        endpoint = "tax/vat/invoice"
+        payload = invoice.to_rs_format()
+        return self._api_request("POST", endpoint, payload)
+        
+    def _api_request(self, method, endpoint, payload=None):
+        """Make authenticated request to RS.ge API"""
+        # Implementation of secure API communication
+        pass</div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Georgian Banking Integration</h3>
+                    <p class="mb-4">
+                        Integration with Georgian banking systems for automated financial operations:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Bank statement imports</li>
+                        <li>Payment order generation</li>
+                        <li>Automated reconciliation</li>
+                        <li>Multi-bank support</li>
+                        <li>Real-time balance checking</li>
+                    </ul>
+                    <div class="code-block text-xs mt-2">
+class BankIntegration:
+    """Integration with Georgian banks"""
+    def __init__(self, bank_code, api_credentials):
+        self.bank_code = bank_code
+        self.credentials = api_credentials
+        self.api_configs = {
+            "BOG": {"url": "https://api.bog.ge/", "version": "v2"},
+            "TBC": {"url": "https://api.tbcbank.ge/", "version": "v1"},
+            # Other Georgian banks
+        }
+        
+    def import_statements(self, start_date, end_date):
+        """Import bank statements for date range"""
+        config = self.api_configs.get(self.bank_code)
+        endpoint = f"{config['url']}{config['version']}/statements"
+        params = {
+            "start_date": start_date.isoformat(),
+            "end_date": end_date.isoformat()
+        }
+        response = self._api_request("GET", endpoint, params=params)
+        return self._parse_statement(response)</div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Georgian Pension System Integration</h3>
+                    <p class="mb-4">
+                        Integration with the Georgian Pension Agency for pension contribution management:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Employee registration with pension system</li>
+                        <li>Monthly contribution reporting</li>
+                        <li>2+2+2 contribution calculation</li>
+                        <li>Contribution payment automation</li>
+                        <li>Pension balance inquiries</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-blue-700">Data Import/Export</h3>
+                    <p class="mb-4">
+                        Comprehensive data interchange capabilities:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Excel data import/export</li>
+                        <li>CSV data processing</li>
+                        <li>PDF report generation</li>
+                        <li>Electronic document exchange</li>
+                        <li>Data backup and migration tools</li>
+                        <li>XBRL export for IFRS reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Implementation Roadmap -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">Implementation Roadmap</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="architecture-box">
+                    <h3 class="font-bold text-lg mb-2 text-blue-700">Phase 1: Core Functionality</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Database schema implementation</li>
+                        <li>Core accounting engine</li>
+                        <li>General ledger module</li>
+                        <li>Basic user interface</li>
+                        <li>Authentication and security</li>
+                        <li>Audit trail foundation</li>
+                    </ul>
+                </div>
+                <div class="architecture-box">
+                    <h3 class="font-bold text-lg mb-2 text-blue-700">Phase 2: Operational Modules</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Accounts payable/receivable</li>
+                        <li>Inventory management</li>
+                        <li>Basic tax calculation</li>
+                        <li>Payroll processing</li>
+                        <li>Financial reporting</li>
+                        <li>Data import/export</li>
+                    </ul>
+                </div>
+                <div class="architecture-box">
+                    <h3 class="font-bold text-lg mb-2 text-blue-700">Phase 3: Compliance &amp; Integration</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Georgian tax reporting</li>
+                        <li>IFRS adjustments</li>
+                        <li>External system integration</li>
+                        <li>Advanced reporting</li>
+                        <li>Workflow approvals</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Testing Strategy</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h4 class="font-bold mb-2">General Testing</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Unit testing of all components</li>
+                        <li>Integration testing between modules</li>
+                        <li>System testing of complete workflow</li>
+                        <li>Performance testing under various loads</li>
+                        <li>Security penetration testing</li>
+                        <li>User acceptance testing</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-2">Georgian Compliance Testing</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>VAT calculation validation against Georgian examples</li>
+                        <li>Tax declaration format verification</li>
+                        <li>Pension contribution calculation testing</li>
+                        <li>Georgian-specific business scenarios</li>
+                        <li>Georgian interface language testing</li>
+                        <li>Compatibility with RS.ge systems</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-2 text-blue-700">Maintenance &amp; Updates</h3>
+            <ul class="list-disc pl-5 space-y-1 mb-4">
+                <li><strong>Legislative Changes:</strong> Regular updates for Georgian tax law changes</li>
+                <li><strong>IFRS Updates:</strong> Annual updates for IFRS standard changes</li>
+                <li><strong>Security Patches:</strong> Ongoing security maintenance</li>
+                <li><strong>Feature Enhancements:</strong> Quarterly feature updates</li>
+                <li><strong>Performance Optimization:</strong> Regular performance tuning</li>
+            </ul>
+        </section>
+        
+        <!-- Conclusion -->
+        <section class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 section-header">Conclusion</h2>
+            <p class="mb-4">
+                This comprehensive accounting software design provides a robust framework for creating a Python-based
+                solution that fully complies with both Georgian legislation and International Financial Reporting Standards.
+                The modular architecture ensures flexibility, scalability, and maintainability while addressing the specific
+                requirements of the Georgian business environment.
+            </p>
+            <p class="mb-4">
+                Key highlights of this design include:
+            </p>
+            <ul class="list-disc pl-5 space-y-1 mb-4">
+                <li>Full compliance with Georgian tax regulations, including the 18% VAT rate and monthly reporting requirements</li>
+                <li>Integration with the Georgian pension system's 2+2+2 contribution scheme</li>
+                <li>IFRS-compliant accounting practices and financial reporting</li>
+                <li>Comprehensive security and audit trail features</li>
+                <li>Integration capabilities with Georgian banking and tax systems</li>
+                <li>Multi-language support with full Georgian localization</li>
+                <li>Modular architecture for customization and extensibility</li>
+            </ul>
+            <p class="mb-2">
+                By implementing this design, Georgian businesses will have access to a powerful, compliant accounting
+                tool that meets their specific needs while adhering to international accounting standards.
+            </p>
+        </section>
+    </div>
+
+
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDsfWH2WWDlzW8oHlKJ%2BmDdcCTjuZ%2BlCalby85R1%2BeYMNb2Q25C6FrYZCfdCpFif71CkN98VINETRY%2F6JRHefUV%2FHes1XYfKP45zCbMkqQtri45qQTkEK5BIQ2JVihkHwsWW6DGXN9rpnzKGUZzawmGREdl2QHQ%2BFbGSDFhR2mgCV89MHyXEaSA7zHwY8nWSuSLH70K121Lx3Hkb5IqFkTOHBy5nbCvHmkTy4JSmpzlhMsr%2F%2BMbkjsRoO9k1eiuddlUOftd8zhvHMk8P650FmsMttneQ5Pjb5STn3nuxcQKdiU0JNC3QhOQRF9y3w%2F8%2FYxPQ81rF%2BEw%2BP056zGD4Q54kUFKxsCRmyFny%2FxbNLEaA4sFE80IuqQ0CZV%2FaNdQQBUIvR2QmPHJHlJcNQV6DnLHWaGNPc7SnGZdPltfdPB2RNfFiX7hLYf2x3Ugdo8mcirihSJzwGL0PYtr%2BpMC6owpCKMOGN8quTtHpcavjdNmGspMD3%2FHv4V9ex%2FZAriee5%2BS880uQdxzV3kn5wjJWctsy0KnmhvopYVbwCOKMKu9b3cHV8cOL%2F5rE73XQsoGo%2FxZNE7XlO7JEBAA8Geg7mDUNkUKtUpED2k%2B4v%2FhfhUbw2AON1Ms6GRhUVV8jtH1Ft1A%3D%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDsfWH2WWDlzW8oHlKJ+mDdcCTjuZ+lCalby85R1+eYMNb2Q25C6FrYZCfdCpFif71CkN98VINETRY/6JRHefUV/Hes1XYfKP45zCbMkqQtri45qQTkEK5BIQ2JVihkHwsWW6DGXN9rpnzKGUZzawmGREdl2QHQ+FbGSDFhR2mgCV89MHyXEaSA7zHwY8nWSuSLH70K121Lx3Hkb5IqFkTOHBy5nbCvHmkTy4JSmpzlhMsr/+MbkjsRoO9k1eiuddlUOftd8zhvHMk8P650FmsMttneQ5Pjb5STn3nuxcQKdiU0JNC3QhOQRF9y3w/8/YxPQ81rF+Ew+P056zGD4Q54kUFKxsCRmyFny/xbNLEaA4sFE80IuqQ0CZV/aNdQQBUIvR2QmPHJHlJcNQV6DnLHWaGNPc7SnGZdPltfdPB2RNfFiX7hLYf2x3Ugdo8mcirihSJzwGL0PYtr+pMC6owpCKMOGN8quTtHpcavjdNmGspMD3/Hv4V9ex/ZAriee5+S880uQdxzV3kn5wjJWctsy0KnmhvopYVbwCOKMKu9b3cHV8cOL/5rE73XQsoGo/xZNE7XlO7JEBAA8Geg7mDUNkUKtUpED2k+4v/hfhUbw2AON1Ms6GRhUVV8jtH1Ft1A==";
+    </script>
+    
+        <script id="html_badge_script2" src="./Georgian IFRS-Compliant Accounting Software Design_files/html_badge.js.download"></script><button class="genspark-badge-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+<path d="M11.3412 0H2.65879C1.19038 0 0 1.19038 0 2.65879V11.3412C0 12.8096 1.19038 14 2.65879 14H11.3412C12.8096 14 14 12.8096 14 11.3412V2.65879C14 1.19038 12.8096 0 11.3412 0Z" fill="white"></path>
+<path d="M11.7403 10.7031H2.29243C2.09641 10.7031 1.9375 10.862 1.9375 11.0581V11.8033C1.9375 11.9993 2.09641 12.1582 2.29243 12.1582H11.7403C11.9363 12.1582 12.0952 11.9993 12.0952 11.8033V11.0581C12.0952 10.862 11.9363 10.7031 11.7403 10.7031Z" fill="#232425"></path>
+<path d="M5.09178 9.18166C5.03494 9.18166 4.98695 9.13998 4.97811 9.08314C4.60803 6.63655 4.34025 6.42056 1.91134 6.05427C1.83682 6.0429 1.78125 5.97848 1.78125 5.9027C1.78125 5.82691 1.83682 5.7625 1.91134 5.75113C4.32762 5.3861 4.54235 5.17011 4.90738 2.7551C4.91874 2.68058 4.98316 2.625 5.05894 2.625C5.13473 2.625 5.19914 2.68058 5.21051 2.7551C5.57554 5.17011 5.79153 5.3861 8.20655 5.75113C8.28107 5.7625 8.33664 5.82691 8.33664 5.9027C8.33664 5.97848 8.28107 6.0429 8.20655 6.05427C5.78017 6.42056 5.57302 6.63655 5.20546 9.08314C5.19662 9.13871 5.14862 9.18166 5.09178 9.18166Z" fill="#232425"></path>
+<path d="M9.70174 5.949C9.66637 5.949 9.63606 5.92248 9.63101 5.88711C9.39986 4.35878 9.23188 4.22363 7.71492 3.99501C7.66818 3.98743 7.63281 3.94828 7.63281 3.90028C7.63281 3.85355 7.66692 3.81313 7.71492 3.80555C9.2243 3.5782 9.35945 3.44305 9.5868 1.93366C9.59438 1.88693 9.63354 1.85156 9.68153 1.85156C9.72827 1.85156 9.76869 1.88567 9.77627 1.93366C10.0036 3.44305 10.1388 3.5782 11.6482 3.80555C11.6949 3.81313 11.7302 3.85228 11.7302 3.90028C11.7302 3.94702 11.6962 3.98743 11.6482 3.99501C10.1325 4.22363 10.0024 4.35878 9.77247 5.88711C9.76742 5.92248 9.73711 5.949 9.70174 5.949Z" fill="#232425"></path>
+<path d="M9.69114 9.76325C9.6684 9.76325 9.64946 9.74683 9.64567 9.7241C9.49915 8.75152 9.39179 8.66563 8.42679 8.52038C8.39648 8.51533 8.375 8.49007 8.375 8.45975C8.375 8.42944 8.39648 8.40418 8.42679 8.39912C9.38673 8.25387 9.47262 8.16798 9.61788 7.20804C9.62293 7.17772 9.64819 7.15625 9.6785 7.15625C9.70882 7.15625 9.73408 7.17772 9.73913 7.20804C9.88439 8.16798 9.97028 8.25387 10.9302 8.39912C10.9605 8.40418 10.982 8.42944 10.982 8.45975C10.982 8.49007 10.9605 8.51533 10.9302 8.52038C9.96523 8.66563 9.88312 8.75152 9.73661 9.7241C9.73282 9.74683 9.71387 9.76325 9.69114 9.76325Z" fill="#232425"></path>
+</svg> Made with Genspark</button><div class="genspark-modal" style="display: none;">
+    <div class="genspark-modal-content">
+      <button class="genspark-close"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+<path d="M11 3L3 11M3 3L11 11" stroke="#232425" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg></button>
+      <h3 class="genspark-title">This page was created by users with AI.</h3>
+      <a class="genspark-report" href="mailto:support@genspark.ai?subject=Report%20inappropriate%20content&amp;body=Current%20URL:%20https://page.genspark.site/page/toolu_01X23eNDhNP8tgJAYSuCeYfH/georgian_ifrs_accounting_software_design.html">Report inappropriate content.</a>
+      <p class="genspark-info">Page owner with Plus Plan can remove badge.</p>
+      <div class="genspark-buttons">
+        <button class="genspark-remove-btn">Remove Badge</button>
+        <button class="genspark-go-btn">Go to Genspark</button>
+      </div>
+    </div>
+  </div>
+        </body></html>

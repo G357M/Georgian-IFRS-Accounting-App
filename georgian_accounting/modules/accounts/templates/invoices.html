@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Invoices{% endblock %}
+
+{% block content %}
+<h2>Invoices</h2>
+<a href="{{ url_for('accounts.add_invoice') }}" class="btn btn-primary mb-3">Add Invoice</a>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Date</th>
+            <th>Party</th>
+            <th>Type</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.invoice_number }}</td>
+            <td>{{ invoice.date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ invoice.customer.name if invoice.customer else invoice.vendor.name }}</td>
+            <td>{{ 'Sales' if invoice.customer else 'Purchase' }}</td>
+            <td>{{ "%.2f"|format(invoice.total_gross) }} {{ invoice.currency }}</td>
+            <td><span class="badge badge-secondary">{{ invoice.status }}</span></td>
+            <td>
+                <a href="{{ url_for('accounts.view_invoice', invoice_id=invoice.id) }}" class="btn btn-sm btn-info">View</a>
+                <a href="{{ url_for('accounts.edit_invoice', invoice_id=invoice.id) }}" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">No invoices found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

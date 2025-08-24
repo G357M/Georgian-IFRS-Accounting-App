@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Inventory Dashboard{% endblock %}
+
+{% block content %}
+<h2>Inventory Dashboard</h2>
+<div class="list-group">
+  <a href="{{ url_for('inventory.list_products') }}" class="list-group-item list-group-item-action">
+    Manage Products
+  </a>
+  <a href="{{ url_for('inventory.list_transactions') }}" class="list-group-item list-group-item-action">
+    Manage Inventory Transactions
+  </a>
+</div>
+{% endblock %}

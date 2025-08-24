@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Tax Rate{% endblock %}
+
+{% block content %}
+<h2>{{ action }} Tax Rate</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="tax_type">Tax Type</label>
+        <input type="text" class="form-control" id="tax_type" name="tax_type" required value="{{ tax_rate.tax_type if tax_rate }}">
+    </div>
+    <div class="form-group">
+        <label for="rate">Rate (%)</label>
+        <input type="number" step="0.0001" class="form-control" id="rate" name="rate" required value="{{ (tax_rate.rate * 100) if tax_rate }}">
+    </div>
+    <div class="form-group">
+        <label for="effective_date">Effective Date</label>
+        <input type="date" class="form-control" id="effective_date" name="effective_date" required value="{{ tax_rate.effective_date.strftime('%Y-%m-%d') if tax_rate }}">
+    </div>
+    <div class="form-group">
+        <label for="end_date">End Date (Optional)</label>
+        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ tax_rate.end_date.strftime('%Y-%m-%d') if tax_rate and tax_rate.end_date }}">
+    </div>
+    <a href="{{ url_for('tax.list_tax_rates') }}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

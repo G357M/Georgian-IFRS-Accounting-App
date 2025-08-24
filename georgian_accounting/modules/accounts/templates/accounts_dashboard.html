@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Accounts Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Accounts Dashboard</h2>
+<div class="list-group">
+  <a href="{{ url_for('accounts.list_customers') }}" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Customers</h5>
+    </div>
+    <p class="mb-1">View, add, and edit customer information.</p>
+  </a>
+  <a href="{{ url_for('accounts.list_vendors') }}" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Vendors</h5>
+    </div>
+    <p class="mb-1">View, add, and edit vendor information.</p>
+  </a>
+  <a href="{{ url_for('accounts.list_invoices') }}" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Invoices</h5>
+    </div>
+    <p class="mb-1">Create and manage sales and purchase invoices.</p>
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Tax Rates{% endblock %}
+
+{% block content %}
+<h2>Tax Rates</h2>
+<a href="{{ url_for('tax.add_tax_rate') }}" class="btn btn-primary mb-3">Add Tax Rate</a>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Tax Type</th>
+            <th>Rate</th>
+            <th>Effective Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tax_rate in tax_rates %}
+        <tr>
+            <td>{{ tax_rate.tax_type }}</td>
+            <td>{{ "%.2f"|format(tax_rate.rate * 100) }}%</td>
+            <td>{{ tax_rate.effective_date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ tax_rate.end_date.strftime('%Y-%m-%d') if tax_rate.end_date else 'Current' }}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-info">View</a>
+                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" class="text-center">No tax rates found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

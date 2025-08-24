@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Invoice {{ invoice.invoice_number }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Invoice #{{ invoice.invoice_number }}</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Date:</strong> {{ invoice.date.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Due Date:</strong> {{ invoice.due_date.strftime('%Y-%m-%d') if invoice.due_date }}</p>
+        <p>
+            <strong>Party:</strong> 
+            {% if invoice.customer %}
+                {{ invoice.customer.name }} (Customer)
+            {% else %}
+                {{ invoice.vendor.name }} (Vendor)
+            {% endif %}
+        </p>
+        <p><strong>Status:</strong> <span class="badge badge-secondary">{{ invoice.status }}</span></p>
+    </div>
+</div>
+
+<h3 class="mt-4">Items</h3>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>VAT Rate</th>
+            <th>Net Amount</th>
+            <th>VAT Amount</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in invoice.items %}
+        <tr>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ "%.2f"|format(item.unit_price) }}</td>
+            <td>{{ "%.2f"|format(item.vat_rate * 100) }}%</td>
+            <td>{{ "%.2f"|format(item.net_amount) }}</td>
+            <td>{{ "%.2f"|format(item.vat_amount) }}</td>
+            <td>{{ "%.2f"|format(item.net_amount + item.vat_amount) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="6" class="text-right">Total Net:</th>
+            <th>{{ "%.2f"|format(invoice.total_net) }}</th>
+        </tr>
+        <tr>
+            <th colspan="6" class="text-right">Total VAT:</th>
+            <th>{{ "%.2f"|format(invoice.total_vat) }}</th>
+        </tr>
+        <tr>
+            <th colspan="6" class="text-right">Total Gross:</th>
+            <th>{{ "%.2f"|format(invoice.total_gross) }}</th>
+        </tr>
+    </tfoot>
+</table>
+
+<a href="{{ url_for('accounts.list_invoices') }}" class="btn btn-secondary">Back to Invoices</a>
+<a href="{{ url_for('accounts.edit_invoice', invoice_id=invoice.id) }}" class="btn btn-warning">Edit</a>
+<a href="{{ url_for('accounts.download_invoice_pdf', invoice_id=invoice.id) }}" class="btn btn-success">Download PDF</a>
+
+{% endblock %}

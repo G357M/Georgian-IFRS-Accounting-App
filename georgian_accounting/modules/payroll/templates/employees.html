@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Employees{% endblock %}
+
+{% block content %}
+<h2>Employees</h2>
+<a href="{{ url_for('payroll.add_employee') }}" class="btn btn-primary mb-3">Add Employee</a>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Personal ID</th>
+            <th>Hire Date</th>
+            <th>Salary</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+            <td>{{ employee.personal_id }}</td>
+            <td>{{ employee.hire_date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ "%.2f"|format(employee.salary) }} {{ employee.salary_currency }}</td>
+            <td>{{ 'Yes' if employee.is_active else 'No' }}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-info">View</a>
+                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" class="text-center">No employees found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

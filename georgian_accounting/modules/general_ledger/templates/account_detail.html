@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Account Details: {{ account.name }}{% endblock %}
+
+{% block content %}
+<h2>Account: {{ account.code }} - {{ account.name }}</h2>
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Account Details</h5>
+        <p class="card-text"><strong>Type:</strong> {{ account.account_type }}</p>
+        <p class="card-text"><strong>Balance:</strong> {{ "%.2f"|format(account.balance) }} {{ account.currency }}</p>
+    </div>
+</div>
+
+<h3>Transactions</h3>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Date</th>
+            <th>Transaction ID</th>
+            <th>Description</th>
+            <th>Debit</th>
+            <th>Credit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in account.entries|sort(attribute='transaction.date', reverse=True) %}
+        <tr>
+            <td>{{ entry.transaction.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ entry.transaction.transaction_uuid }}</td>
+            <td>{{ entry.transaction.description }}</td>
+            <td>{{ "%.2f"|format(entry.debit) if entry.debit > 0 else '' }}</td>
+            <td>{{ "%.2f"|format(entry.credit) if entry.credit > 0 else '' }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" class="text-center">No transactions for this account yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('general_ledger.chart_of_accounts') }}" class="btn btn-secondary">Back to Chart of Accounts</a>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}New Invoice{% endblock %}
+
+{% block content %}
+<h2>New Invoice</h2>
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="invoice_type">Invoice Type</label>
+                <select class="form-control" id="invoice_type" name="invoice_type" required>
+                    <option value="sales">Sales</option>
+                    <option value="purchase">Purchase</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" id="customer_select_div">
+                <label for="customer_id">Customer</label>
+                <select class="form-control" id="customer_id" name="customer_id">
+                    {% for customer in customers %}
+                    <option value="{{ customer.id }}">{{ customer.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group" id="vendor_select_div" style="display: none;">
+                <label for="vendor_id">Vendor</label>
+                <select class="form-control" id="vendor_id" name="vendor_id">
+                    {% for vendor in vendors %}
+                    <option value="{{ vendor.id }}">{{ vendor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="invoice_number">Invoice Number</label>
+                <input type="text" class="form-control" id="invoice_number" name="invoice_number" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h4>Invoice Items</h4>
+    <div id="invoice-items-container">
+        <!-- Item rows will be added here -->
+    </div>
+    <button type="button" id="add-item-btn" class="btn btn-info mt-2">Add Item</button>
+    <hr>
+    <a href="{{ url_for('accounts.list_invoices') }}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Create Invoice</button>
+</form>
+
+<script>
+    // Toggle between customer and vendor dropdowns
+    document.getElementById('invoice_type').addEventListener('change', function() {
+        if (this.value === 'sales') {
+            document.getElementById('customer_select_div').style.display = 'block';
+            document.getElementById('vendor_select_div').style.display = 'none';
+        } else {
+            document.getElementById('customer_select_div').style.display = 'none';
+            document.getElementById('vendor_select_div').style.display = 'block';
+        }
+    });
+
+    // Dynamic invoice items
+    const container = document.getElementById('invoice-items-container');
+    const addItemBtn = document.getElementById('add-item-btn');
+    let itemIndex = 0;
+
+    function createItemRow() {
+        const itemRow = document.createElement('div');
+        itemRow.classList.add('row', 'mb-2', 'invoice-item');
+        itemRow.innerHTML = `
+            <div class="col-md-4">
+                <input type="text" name="items-${itemIndex}-description" class="form-control" placeholder="Description" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="items-${itemIndex}-quantity" class="form-control" value="1" step="any" placeholder="Quantity" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="items-${itemIndex}-unit_price" class="form-control" step="0.01" placeholder="Unit Price" required>
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="items-${itemIndex}-vat_rate" class="form-control" value="0.18" step="0.01" placeholder="VAT Rate" required>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-item-btn">Remove</button>
+            </div>
+        `;
+        container.appendChild(itemRow);
+        itemIndex++;
+    }
+
+    addItemBtn.addEventListener('click', createItemRow);
+
+    container.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('remove-item-btn')) {
+            e.target.closest('.invoice-item').remove();
+        }
+    });
+
+    // Add one item row by default
+    createItemRow();
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Vendor{% endblock %}
+
+{% block content %}
+<h2>{{ action }} Vendor</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="name">Vendor Name</label>
+        <input type="text" class="form-control" id="name" name="name" required value="{{ vendor.name if vendor }}">
+    </div>
+    <div class="form-group">
+        <label for="tax_id">Tax ID</label>
+        <input type="text" class="form-control" id="tax_id" name="tax_id" value="{{ vendor.tax_id if vendor }}">
+    </div>
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="is_foreign" name="is_foreign" {% if vendor and vendor.is_foreign %}checked{% endif %}>
+        <label class="form-check-label" for="is_foreign">Is Foreign</label>
+    </div>
+    <a href="{{ url_for('accounts.list_vendors') }}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

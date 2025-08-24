@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Account{% endblock %}
+
+{% block content %}
+<h2>{{ action }} Account</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="code">Account Code</label>
+        <input type="text" class="form-control" id="code" name="code" required value="{{ account.code if account }}">
+    </div>
+    <div class="form-group">
+        <label for="name">Account Name</label>
+        <input type="text" class="form-control" id="name" name="name" required value="{{ account.name if account }}">
+    </div>
+    <div class="form-group">
+        <label for="account_type">Account Type</label>
+        <select class="form-control" id="account_type" name="account_type" required>
+            {% set account_types = ['Asset', 'Liability', 'Equity', 'Revenue', 'Expense'] %}
+            {% for type in account_types %}
+                <option value="{{ type }}" {% if account and account.account_type == type %}selected{% endif %}>{{ type }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <a href="{{ url_for('general_ledger.chart_of_accounts') }}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

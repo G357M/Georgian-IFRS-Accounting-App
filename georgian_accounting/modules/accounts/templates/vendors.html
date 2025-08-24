@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Vendors{% endblock %}
+
+{% block content %}
+<h2>Vendors</h2>
+<a href="{{ url_for('accounts.add_vendor') }}" class="btn btn-primary mb-3">Add Vendor</a>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Tax ID</th>
+            <th>Foreign</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vendor in vendors %}
+        <tr>
+            <td>{{ vendor.name }}</td>
+            <td>{{ vendor.tax_id or 'N/A' }}</td>
+            <td>{{ 'Yes' if vendor.is_foreign else 'No' }}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-info">View</a>
+                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4" class="text-center">No vendors found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

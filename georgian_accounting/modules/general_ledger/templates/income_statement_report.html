@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Income Statement{% endblock %}
+
+{% block content %}
+<h2>Income Statement</h2>
+<h3>For the Period Ended {{ report.period_end.strftime('%Y-%m-%d') }}</h3>
+<p>Company: {{ report.company }}</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Revenue</h4>
+        <ul class="list-group mb-2">
+            {% for name, amount in report.revenue.items() %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ name }}
+                    <span>{{ "%.2f"|format(amount) }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <h4 class="mt-3">Total Revenue: {{ "%.2f"|format(report.total_revenue) }}</h4>
+    </div>
+    <div class="col-md-6">
+        <h4>Expenses</h4>
+        <ul class="list-group mb-2">
+            {% for name, amount in report.expenses.items() %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ name }}
+                    <span>{{ "%.2f"|format(amount) }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <h4 class="mt-3">Total Expenses: {{ "%.2f"|format(report.total_expenses) }}</h4>
+    </div>
+</div>
+
+<h3 class="mt-4">Net Income: {{ "%.2f"|format(report.net_income) }}</h3>
+
+<a href="{{ url_for('general_ledger.financial_statements_dashboard') }}" class="btn btn-secondary mt-3">Back to Financial Statements</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Audit Log Report{% endblock %}
+
+{% block content %}
+<h2>Audit Log Report</h2>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Timestamp</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Entity Type</th>
+            <th>Entity ID</th>
+            <th>Changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in audit_entries %}
+        <tr>
+            <td>{{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td>{{ entry.user.username if entry.user else 'System' }}</td>
+            <td>{{ entry.action }}</td>
+            <td>{{ entry.entity_type }}</td>
+            <td>{{ entry.entity_id or 'N/A' }}</td>
+            <td>
+                {% if entry.changes %}
+                    <pre>{{ entry.changes | tojson(indent=2) }}</pre>
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" class="text-center">No audit entries found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
