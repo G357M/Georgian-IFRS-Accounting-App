@@ -3,19 +3,23 @@
 {% block title %}Tax Dashboard{% endblock %}
 
 {% block content %}
-<h2>Tax Dashboard</h2>
+<h2 class="mb-4">Tax Dashboard</h2>
 <div class="list-group">
   <a href="{{ url_for('tax.list_tax_rates') }}" class="list-group-item list-group-item-action">
-    Manage Tax Rates
+    <h5 class="mb-1">Tax Rates</h5>
+    <p class="mb-1">View and manage tax rates for VAT, income tax, etc.</p>
   </a>
   <a href="{{ url_for('tax.list_vat_declarations') }}" class="list-group-item list-group-item-action">
-    Manage VAT Declarations
+    <h5 class="mb-1">VAT Declarations</h5>
+    <p class="mb-1">Generate, view, and manage VAT declarations.</p>
   </a>
   <a href="{{ url_for('tax.list_income_tax_declarations') }}" class="list-group-item list-group-item-action">
-    Manage Income Tax Declarations
+    <h5 class="mb-1">Income Tax Declarations</h5>
+    <p class="mb-1">Generate, view, and manage corporate income tax declarations.</p>
   </a>
   <a href="{{ url_for('tax.view_tax_calendar') }}" class="list-group-item list-group-item-action">
-    View Tax Calendar
+    <h5 class="mb-1">Tax Calendar</h5>
+    <p class="mb-1">View important tax deadlines and filing dates.</p>
   </a>
 </div>
 {% endblock %}

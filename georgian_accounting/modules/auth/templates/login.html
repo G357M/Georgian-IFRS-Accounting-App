@@ -1,18 +1,27 @@
 {% extends "base.html" %}
+{% from "_form_helpers.html" import render_field %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="POST" action="{{ url_for('auth.login') }}">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Login</h2>
+            <form method="POST" action="{{ url_for('auth.login') }}" novalidate>
+                {{ form.hidden_tag() }} {# This adds the CSRF token #}
+
+                {{ render_field(form.email, class="form-control", autocomplete="email") }}
+                {{ render_field(form.password, class="form-control", autocomplete="current-password") }}
+
+                <div class="mb-3 form-check">
+                    {{ form.remember_me(class="form-check-input") }}
+                    {{ form.remember_me.label(class="form-check-label") }}
+                </div>
+
+                {{ form.submit(class="btn btn-primary") }}
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</div>
 {% endblock %}

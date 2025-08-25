@@ -3,16 +3,19 @@
 {% block title %}Payroll Dashboard{% endblock %}
 
 {% block content %}
-<h2>Payroll Dashboard</h2>
+<h2 class="mb-4">Payroll Dashboard</h2>
 <div class="list-group">
   <a href="{{ url_for('payroll.list_employees') }}" class="list-group-item list-group-item-action">
-    Manage Employees
+    <h5 class="mb-1">Employees</h5>
+    <p class="mb-1">View, add, and manage employee information.</p>
   </a>
   <a href="{{ url_for('payroll.list_periods') }}" class="list-group-item list-group-item-action">
-    Manage Payroll Periods
+    <h5 class="mb-1">Payroll Periods</h5>
+    <p class="mb-1">Define and manage payroll periods for processing.</p>
   </a>
   <a href="{{ url_for('payroll.list_payslips') }}" class="list-group-item list-group-item-action">
-    Manage Payslips
+    <h5 class="mb-1">Payslips</h5>
+    <p class="mb-1">Generate, view, and manage employee payslips.</p>
   </a>
 </div>
 {% endblock %}

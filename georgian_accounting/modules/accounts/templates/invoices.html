@@ -29,6 +29,10 @@
             <td>
                 <a href="{{ url_for('accounts.view_invoice', invoice_id=invoice.id) }}" class="btn btn-sm btn-info">View</a>
                 <a href="{{ url_for('accounts.edit_invoice', invoice_id=invoice.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{{ url_for('accounts.delete_invoice', invoice_id=invoice.id) }}" method="POST" class="d-inline">
+                    {{ delete_form.hidden_tag() }} {# Requires passing delete_form from the route #}
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                </form>
             </td>
         </tr>
         {% else %}

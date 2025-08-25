@@ -1,12 +1,14 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from .models import Account, Transaction, JournalEntry
+from georgian_accounting.modules.accounts.models import Account
+from .models import Transaction, JournalEntry
 from georgian_accounting.database import db
 from decimal import Decimal
 from datetime import datetime
 from georgian_accounting.utils.decorators import permission_required
 from georgian_accounting.modules.general_ledger.reports import generate_balance_sheet, generate_income_statement
 from georgian_accounting.core.models import Company
+from .forms import AccountForm, TransactionForm # Import new forms
 
 general_ledger_bp = Blueprint(
     'general_ledger', 
@@ -18,28 +20,22 @@ general_ledger_bp = Blueprint(
 @login_required
 @permission_required('view_gl')
 def chart_of_accounts():
-    accounts = Account.query.order_by(Account.code).all()
+    accounts = Account.query.order_by(Account.account_number).all()
     return render_template('chart_of_accounts.html', accounts=accounts)
 
 @general_ledger_bp.route('/account/new', methods=['GET', 'POST'])
 @login_required
 @permission_required('manage_gl')
 def add_account():
-    if request.method == 'POST':
-        code = request.form.get('code')
-        name = request.form.get('name')
-        account_type = request.form.get('account_type')
-        
-        if Account.query.filter_by(code=code).first():
-            flash('Account code already exists.', 'danger')
-        else:
-            new_account = Account(code=code, name=name, account_type=account_type)
-            db.session.add(new_account)
-            db.session.commit()
-            flash('Account created successfully!', 'success')
-            return redirect(url_for('general_ledger.chart_of_accounts'))
-            
-    return render_template('account_form.html', action="Add")
+    form = AccountForm()
+    if form.validate_on_submit():
+        new_account = Account()
+        form.populate_obj(new_account)
+        db.session.add(new_account)
+        db.session.commit()
+        flash('Account created successfully!', 'success')
+        return redirect(url_for('general_ledger.chart_of_accounts'))
+    return render_template('account_form.html', form=form, action="Add")
 
 @general_ledger_bp.route('/account/<int:account_id>')
 @login_required
@@ -52,61 +48,56 @@ def account_detail(account_id):
 @login_required
 @permission_required('manage_gl')
 def add_transaction():
-    if request.method == 'POST':
-        date_str = request.form.get('date')
-        description = request.form.get('description')
-        debit_account_id = int(request.form.get('debit_account'))
-        debit_amount = Decimal(request.form.get('debit_amount'))
-        credit_account_id = int(request.form.get('credit_account'))
-        credit_amount = Decimal(request.form.get('credit_amount'))
+    form = TransactionForm()
+    if form.validate_on_submit():
+        try:
+            # --- Start of logic that should be in a service ---
+            new_trans = Transaction(
+                date=form.date.data, 
+                description=form.description.data
+            )
+            
+            debit_entry = JournalEntry(
+                transaction=new_trans,
+                account=form.debit_account.data,
+                debit=form.amount.data
+            )
+            credit_entry = JournalEntry(
+                transaction=new_trans,
+                account=form.credit_account.data,
+                credit=form.amount.data
+            )
+            
+            debit_account = form.debit_account.data
+            credit_account = form.credit_account.data
+            amount = form.amount.data
+            
+            # This logic is incorrect for a real accounting system and needs review.
+            # Balance updates should be handled carefully based on account type.
+            if debit_account.account_type_rel.name in ['Asset', 'Expense']:
+                debit_account.balance = debit_account.balance + amount
+            else:
+                debit_account.balance = debit_account.balance - amount
 
-        if debit_amount != credit_amount or debit_account_id == credit_account_id:
-            flash('Debits must equal credits and accounts must be different.', 'danger')
-        else:
-            try:
-                date = datetime.fromisoformat(date_str)
-                
-                new_trans = Transaction(date=date, description=description)
-                
-                debit_entry = JournalEntry(
-                    transaction=new_trans,
-                    account_id=debit_account_id,
-                    debit=debit_amount
-                )
-                credit_entry = JournalEntry(
-                    transaction=new_trans,
-                    account_id=credit_account_id,
-                    credit=credit_amount
-                )
-                
-                debit_account = Account.query.get(debit_account_id)
-                credit_account = Account.query.get(credit_account_id)
-                
-                # This is a simplification. Real accounting rules are more complex.
-                if debit_account.account_type in ['Asset', 'Expense']:
-                    debit_account.balance += debit_amount
-                else:
-                    debit_account.balance -= debit_amount
+            if credit_account.account_type_rel.name in ['Liability', 'Equity', 'Revenue']:
+                credit_account.balance = credit_account.balance + amount
+            else:
+                credit_account.balance = credit_account.balance - amount
+            # --- End of logic that should be in a service ---
 
-                if credit_account.account_type in ['Liability', 'Equity', 'Revenue']:
-                    credit_account.balance += credit_amount
-                else:
-                    credit_account.balance -= credit_amount
+            db.session.add(new_trans)
+            db.session.add(debit_entry)
+            db.session.add(credit_entry)
+            db.session.commit()
 
-                db.session.add(new_trans)
-                db.session.add(debit_entry)
-                db.session.add(credit_entry)
-                db.session.commit()
+            flash('Transaction created successfully!', 'success')
+            return redirect(url_for('general_ledger.chart_of_accounts'))
 
-                flash('Transaction created successfully!', 'success')
-                return redirect(url_for('general_ledger.chart_of_accounts'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error creating transaction: {e}', 'danger')
 
-            except Exception as e:
-                db.session.rollback()
-                flash(f'Error creating transaction: {e}', 'danger')
-
-    accounts = Account.query.order_by(Account.code).all()
-    return render_template('transaction_form.html', accounts=accounts)
+    return render_template('transaction_form.html', form=form)
 
 # Financial Statements Routes
 @general_ledger_bp.route('/financial-statements')

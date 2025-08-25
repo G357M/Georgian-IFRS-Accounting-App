@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% from "_form_helpers.html" import render_field %} {# You might need to create this helper #}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ action }} Account</h2>
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }} {# Includes CSRF token #}
+        
+        {{ render_field(form.account_number, class="form-control") }}
+        {{ render_field(form.account_name, class="form-control") }}
+        {{ render_field(form.description, class="form-control") }}
+        {{ render_field(form.account_type_id, class="form-select") }}
+        {{ render_field(form.parent_id, class="form-select") }}
+        
+        <div class="mb-3 form-check">
+            {{ form.is_active(class="form-check-input") }}
+            {{ form.is_active.label(class="form-check-label") }}
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('accounts.list_chart_of_accounts') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

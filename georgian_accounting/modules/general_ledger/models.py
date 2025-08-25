@@ -2,22 +2,7 @@ import uuid
 from datetime import datetime
 from decimal import Decimal
 from georgian_accounting.database import db
-
-class Account(db.Model):
-    __tablename__ = 'accounts'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(20), unique=True, nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-    account_type = db.Column(db.String(20), nullable=False)
-    currency = db.Column(db.String(3), nullable=False, default='GEL')
-    is_active = db.Column(db.Boolean, default=True)
-    balance = db.Column(db.Numeric(15, 2), default=Decimal('0.00'))
-    
-    entries = db.relationship('JournalEntry', back_populates='account')
-
-    def __repr__(self):
-        return f'<Account {self.code} - {self.name}>'
+from georgian_accounting.modules.accounts.models import Account
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'

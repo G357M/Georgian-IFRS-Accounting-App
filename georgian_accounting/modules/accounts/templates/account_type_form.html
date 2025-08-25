@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ action }} Account Type</h2>
+    <form method="POST">
+        {{ form.csrf_token }} {# Add this line for CSRF protection #}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ account_type.name if account_type else '' }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description">{{ account_type.description if account_type else '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ action }} Account Type</button>
+        <a href="{{ url_for('accounts.list_account_types') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

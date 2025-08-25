@@ -1,35 +1,31 @@
 {% extends "base.html" %}
+{% from "_form_helpers.html" import render_field %}
 
 {% block title %}{{ action }} Product{% endblock %}
 
 {% block content %}
-<h2>{{ action }} Product</h2>
-<form method="POST">
-    <div class="form-group">
-        <label for="code">Product Code</label>
-        <input type="text" class="form-control" id="code" name="code" required value="{{ product.code if product }}">
-    </div>
-    <div class="form-group">
-        <label for="name">Product Name</label>
-        <input type="text" class="form-control" id="name" name="name" required value="{{ product.name if product }}">
-    </div>
-    <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" class="form-control" id="category" name="category" value="{{ product.category if product }}">
-    </div>
-    <div class="form-group">
-        <label for="unit_of_measure">Unit of Measure</label>
-        <input type="text" class="form-control" id="unit_of_measure" name="unit_of_measure" value="{{ product.unit_of_measure if product }}">
-    </div>
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="is_vat_exempt" name="is_vat_exempt" {% if product and product.is_vat_exempt %}checked{% endif %}>
-        <label class="form-check-label" for="is_vat_exempt">VAT Exempt</label>
-    </div>
-    <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="is_active" name="is_active" {% if product and product.is_active %}checked{% endif %}>
-        <label class="form-check-label" for="is_active">Active</label>
-    </div>
-    <a href="{{ url_for('inventory.list_products') }}" class="btn btn-secondary">Cancel</a>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="container mt-4">
+    <h2>{{ action }} Product</h2>
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }} {# This adds the CSRF token #}
+
+        {{ render_field(form.code, class="form-control") }}
+        {{ render_field(form.name, class="form-control") }}
+        {{ render_field(form.category, class="form-control") }}
+        {{ render_field(form.unit_of_measure, class="form-control") }}
+
+        <div class="mb-3 form-check">
+            {{ form.is_vat_exempt(class="form-check-input") }}
+            {{ form.is_vat_exempt.label(class="form-check-label") }}
+        </div>
+
+        <div class="mb-3 form-check">
+            {{ form.is_active(class="form-check-input") }}
+            {{ form.is_active.label(class="form-check-label") }}
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('inventory.list_products') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 {% endblock %}

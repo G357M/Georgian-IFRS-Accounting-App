@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required
-from georgian_accounting.utils.decorators import permission_required
 from .models import Employee
 from georgian_accounting.database import db
-from datetime import datetime
-from decimal import Decimal
+from georgian_accounting.utils.decorators import permission_required
+from .forms import EmployeeForm, DeleteForm 
 
 payroll_bp = Blueprint(
     'payroll', 
@@ -24,39 +23,53 @@ def index():
 @permission_required('view_payroll')
 def list_employees():
     employees = Employee.query.order_by(Employee.last_name, Employee.first_name).all()
-    return render_template('employees.html', employees=employees)
+    delete_form = DeleteForm()  # For CSRF protection on delete buttons
+    return render_template('employees.html', employees=employees, delete_form=delete_form)
 
 @payroll_bp.route('/employee/new', methods=['GET', 'POST'])
 @login_required
 @permission_required('manage_payroll')
 def add_employee():
-    if request.method == 'POST':
-        first_name = request.form.get('first_name')
-        last_name = request.form.get('last_name')
-        personal_id = request.form.get('personal_id')
-        hire_date = datetime.strptime(request.form.get('hire_date'), '%Y-%m-%d')
-        salary = Decimal(request.form.get('salary'))
-        is_active = 'is_active' in request.form
-        in_pension_scheme = 'in_pension_scheme' in request.form
+    form = EmployeeForm()
+    if form.validate_on_submit():
+        new_employee = Employee()
+        form.populate_obj(new_employee)
+        db.session.add(new_employee)
+        db.session.commit()
+        flash('Employee added successfully!', 'success')
+        return redirect(url_for('payroll.list_employees'))
+    return render_template('employee_form.html', form=form, action="Add")
 
-        if Employee.query.filter_by(personal_id=personal_id).first():
-            flash('Employee with this Personal ID already exists.', 'danger')
-        else:
-            new_employee = Employee(
-                first_name=first_name,
-                last_name=last_name,
-                personal_id=personal_id,
-                hire_date=hire_date,
-                salary=salary,
-                is_active=is_active,
-                in_pension_scheme=in_pension_scheme
-            )
-            db.session.add(new_employee)
+@payroll_bp.route('/employee/edit/<int:employee_id>', methods=['GET', 'POST'])
+@login_required
+@permission_required('manage_payroll')
+def edit_employee(employee_id):
+    employee = Employee.query.get_or_404(employee_id)
+    form = EmployeeForm(obj=employee, original_personal_id=employee.personal_id)
+    if form.validate_on_submit():
+        form.populate_obj(employee)
+        db.session.commit()
+        flash('Employee updated successfully!', 'success')
+        return redirect(url_for('payroll.list_employees'))
+    return render_template('employee_form.html', form=form, action="Edit")
+
+@payroll_bp.route('/employee/delete/<int:employee_id>', methods=['POST'])
+@login_required
+@permission_required('manage_payroll')
+def delete_employee(employee_id):
+    form = DeleteForm()
+    if form.validate_on_submit(): # This validates the CSRF token
+        employee = Employee.query.get_or_404(employee_id)
+        try:
+            db.session.delete(employee)
             db.session.commit()
-            flash('Employee added successfully!', 'success')
-            return redirect(url_for('payroll.list_employees'))
-            
-    return render_template('employee_form.html', action="Add")
+            flash('Employee deleted successfully.', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error deleting employee. They might be associated with payrolls. Error: {e}', 'danger')
+    else:
+        flash('Invalid request. Could not delete employee.', 'danger')
+    return redirect(url_for('payroll.list_employees'))
 
 @payroll_bp.route('/periods')
 @login_required

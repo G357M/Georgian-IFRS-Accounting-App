@@ -54,14 +54,20 @@ def before_flush(session, flush_context, instances):
 
     for obj in session.deleted:
         if not isinstance(obj, AuditTrail):
-            changes = get_model_changes(obj)
+            # For deleted objects, getting detailed changes can be unreliable.
+            # It's often more robust to just log the fact of deletion.
             identity = db.inspect(obj).identity
             entity_id = str(identity[0]) if identity else None
+            
+            # Create a simple representation of the deleted object's data
+            changes = {attr.key: {'old': getattr(obj, attr.key, None), 'new': None} 
+                       for attr in db.inspect(obj).mapper.column_attrs}
+
             audit = AuditTrail(
                 user_id=user_id,
                 entity_type=obj.__tablename__,
                 entity_id=entity_id,
                 action='delete',
-                changes=changes
+                changes=changes # Log the state of the object just before deletion
             )
             session.add(audit)
