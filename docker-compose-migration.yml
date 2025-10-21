@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  # Текущая система (legacy)
+  legacy-app:
+    build: ./
+    ports:
+      - "8080:8080"
+    networks:
+      - migration-network
+  
+  # Новая система (target)
+  new-api-gateway:
+    build: ./new-system/gateway
+    ports:
+      - "8000:8000"
+    networks:
+      - migration-network
+  
+  # Shared resources
+  postgres-new:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: accounting_new
+    networks:
+      - migration-network
+  
+  redis:
+    image: redis:7-alpine
+    networks:
+      - migration-network
+
+networks:
+  migration-network:
+    driver: bridge

@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install pytest httpx
+
+# Command to run tests
+CMD ["pytest"]

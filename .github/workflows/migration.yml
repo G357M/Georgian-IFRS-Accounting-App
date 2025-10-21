@@ -1,0 +1,29 @@
+name: Migration Pipeline
+on:
+  push:
+    branches: [main, migration/*]
+
+jobs:
+  test-legacy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test Legacy System
+        run: |
+          docker-compose -f legacy/docker-compose.test.yml up --abort-on-container-exit
+  
+  test-new-system:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test New System
+        run: |
+          docker-compose -f new-system/docker-compose.test.yml up --abort-on-container-exit
+  
+  deploy-staging:
+    needs: [test-legacy, test-new-system]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Staging
+        run: |
+          kubectl apply -f k8s/staging/
